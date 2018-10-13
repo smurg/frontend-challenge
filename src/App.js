@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import RoutableWizzardForm from './Components/RoutableWizzardForm';
 
 class App extends Component {
   render() {
+    
     return (
       <div>
         <header>
@@ -10,6 +12,7 @@ class App extends Component {
         <p>
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <RoutableWizzardForm></RoutableWizzardForm>
       </div>
     );
   }
