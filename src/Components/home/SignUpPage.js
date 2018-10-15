@@ -1,28 +1,30 @@
 import React, { Component } from 'react';
 import { Header, Container } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 import SignUpForm from './SignUpForm';
+import { connect } from 'react-redux';
+import  * as signupActions from '../../actions/signupActions';
 
-export class SignUpPage extends Component {
+class SignUpPage extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      userName: '',
-      email: '',
-      password: '',
+      userName: props.userName,
+      email: props.email,
+      password: props.password,
       nextStep: false
-    }
+    };
   }
 
   handleChange = (event, { name, value }) => {
-   /* const propValue = event.target.value,
-      propName = event.target.name; */
     this.setState({ [name]: value });
   }
 
   handleSubmit = event => {
-    debugger;
+    const { userName, email, password } = this.state;
+    this.props.saveSignUp({ userName, email, password });
     this.setState({ nextStep: true });
-    console.log(this.props);
     event.preventDefault();
   }
 
@@ -38,16 +40,34 @@ export class SignUpPage extends Component {
           password={password}
           onChangeHandler={this.handleChange}
           submitHandler={this.handleSubmit}
-          gotoNextStep={false}
+          gotoNextStep={nextStep}
           nextStepUrl='/more-info' />
-
-
-      <pre>{JSON.stringify(this.state, null, 2)}</pre>
-     {/* <ButtonLink linkTo="/more-info" buttonText='Next' type='primary' float='right' /> */}
       </Container>
     )
   }
 }
 
-export default SignUpPage;
+SignUpPage.propTypes = {
+  userName: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  saveSignUp: PropTypes.func.isRequired
+}
 
+function mapStateToProps(state, ownProps) {
+  return {
+    userName: state.userName,
+    email: state.email,
+    password: state.password 
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    saveSignUp: (signUpData) => {
+      dispatch(signupActions.signUp(signUpData)); 
+    } 
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage);

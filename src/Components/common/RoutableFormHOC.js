@@ -18,7 +18,9 @@ const RoutableFormHOC = (WrappedComponent) => {
         <Redirect to={props.nextStepUrl}/> :
         !isEmpty(props.gotoPreviousStep) && props.gotoPreviousStep ?
           <Redirect to={props.previousStepUrl}/> :
-          <WrappedComponent {...props}/>
+          !isEmpty(props.error) && props.error ?
+            <Redirect to={props.errorPageUrl}/> :
+            <WrappedComponent {...props}/>
     );
   }
 }

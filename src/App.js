@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import RoutableWizzardForm from './Components/RoutableWizzardForm';
+import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
-class App extends Component {
-  render() {
-    
-    return (
-      <div>
-        <header>
-          <h1>Welcome to Upgrade challenge</h1>
-        </header>
-        <p>
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+const App = ({ store }) => {
+  return (
+    <Provider store={store}>
+      <BrowserRouter> 
         <RoutableWizzardForm></RoutableWizzardForm>
-      </div>
-    );
-  }
+      </BrowserRouter>
+    </Provider>
+  );
+}
+
+App.propTypes = {
+  store: PropTypes.object.isRequired
 }
 
 export default App;
