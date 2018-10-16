@@ -12,6 +12,7 @@ class SignUpPage extends Component {
     this.state = {
       userName: props.userName,
       email: props.email,
+      emailError: false,
       password: props.password,
       nextStep: false
     };
@@ -19,17 +20,30 @@ class SignUpPage extends Component {
 
   handleChange = (event, { name, value }) => {
     this.setState({ [name]: value });
+    if (name === 'email') {
+      this.setState({ emailError: false }); // clear error message
+    }
   }
 
   handleSubmit = event => {
     const { userName, email, password } = this.state;
-    this.props.saveSignUp({ userName, email, password });
-    this.setState({ nextStep: true });
     event.preventDefault();
+    if (this.validEmail()) {
+      this.props.saveSignUp({ userName, email, password });
+      this.setState({ nextStep: true });
+    } else {
+      this.setState({ emailError: true });
+    }
+  }
+
+  validEmail() {
+    // this is a simple email validator 
+    const email = this.state.email;
+    return /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(email); 
   }
 
   render() {
-    const { userName, email, password, nextStep } = this.state;
+    const { userName, email, emailError, password, nextStep } = this.state;
     return (
       <Container text>
         <Header as='h1' textAlign='center'>Sign Up</Header>
@@ -37,6 +51,7 @@ class SignUpPage extends Component {
           loading={false} 
           userName={userName} 
           email={email}
+          emailError={emailError}
           password={password}
           onChangeHandler={this.handleChange}
           submitHandler={this.handleSubmit}

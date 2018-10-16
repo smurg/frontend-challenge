@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Form } from 'semantic-ui-react';
+import { Form, Message } from 'semantic-ui-react';
 import RoutableFormHOC from '../common/RoutableFormHOC';
+import './SignUpForm.css';
 
 class SignUpForm extends Component {
   constructor(props) {
@@ -17,12 +18,23 @@ class SignUpForm extends Component {
   }
 
   render() {
-  const { loading, userName, email, password, onChangeHandler, submitHandler } = this.props;
+  const { loading, userName, email, emailError, password, onChangeHandler, submitHandler } = this.props;
 
   return (
-    <Form loading={loading} onSubmit={submitHandler}>
+    <Form loading={loading} onSubmit={submitHandler} error={emailError} id='sign-up'>
       <Form.Input required label='First Name' name='userName' value={userName} onChange={onChangeHandler} placeholder='First Name'/> 
-      <Form.Input required label='Email' name='email' value={email} onChange={onChangeHandler} placeholder='Email'/>
+      <Form.Input required 
+       label='Email' 
+       name='email' 
+       value={email}
+       error={emailError} 
+       onChange={onChangeHandler} 
+       placeholder='Email'/>
+       { emailError && 
+        <Message
+          error={emailError}
+          content='Please enter a valid email address.'/> }
+
       <Form.Input required
        label='Password'
        icon={{ name: this.state.showPassword ? 'eye' : 'eye slash', link: true, onClick: this.toggleShowPassword }} 
@@ -31,6 +43,9 @@ class SignUpForm extends Component {
        value={password} 
        onChange={onChangeHandler} 
        placeholder='Password'/>
+       <div className="field required-info">
+        <label>required fields</label>
+      </div>
       <Form.Button primary content='Next' disabled={!userName || !email || !password} /> 
     </Form>
   );

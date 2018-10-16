@@ -1,0 +1,13 @@
+.required-info label:before {
+  display: inline-block;
+  vertical-align: top;
+  margin: -.2em 0 0 .2em;
+  content: '*';
+  color: #db2828;
+}
+
+#sign-up .required-info label {
+  color: #666;
+  font-style: italic;
+  font-weight: 300;
+}
