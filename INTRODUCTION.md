@@ -1,16 +1,14 @@
-`INTRODUCTION.md` file to explain the different concepts explored within your implementation and why you decided to implement things the way they are, just keep in mind that the goal is to help guide the person that is going to be reviewing your code so try to make it clear and concise.
-
-
 ### Introduction
 
-This proyect was done using `yarn` and in order to be not too much development time consuming, I will be using the create-react-app configurations from `react-scripts`, so no `webpack` or `babel` configuration needed.
+This project was done using `yarn` and in order to be not too much development time consuming, I will be using the create-react-app configurations from `react-scripts`, so no `webpack` or `babel` configuration needed.
 
 ### Dependencies
 
 The dependencies needed to create this solution detailed under `package.json` file are:
 	- `redux & react-redux`: to handle centralized state.
 	- `react-router`: we will have each step of the form in different urls.
-	- `semantic-ui-css & semantic-ui-react`: these packages are used to build the UI of the app. I used the React version of Semantic UI, that fits pretty well and provides me with clean, responsive styling without having to put too much time into rolling my own CSS. prebuilt 
+	- `Enzime`: test utility to be used with Jest testing framework.
+	- `semantic-ui-css & semantic-ui-react`: these packages are used to build the UI of the app. I used the React version of Semantic UI, that fits pretty well and provides me with clean, responsive styling without having to put too much time into rolling my own CSS. prebuilt 
 
 ### File Structure
 
@@ -21,9 +19,9 @@ frontend-challenge
     ├── App.test.js
     ├── index.js
     ├── Components
-					└── components grouped by feature/routes in folders. 
-		├── store
-		├── reducers
+            └── components grouped by feature/routes in folders. 
+    ├── store
+    ├── reducers
     └── actions
 ```
 
